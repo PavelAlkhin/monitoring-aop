@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id("maven-publish")
+}
+
+group = "scoring"
+version = "1.0.0-SNAPSHOT"
+ext.artName = "monitoring"
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    withSourcesJar()
+}
+
+tasks.register('sourceJar', Jar) {
+    from sourceSets.main.allJava
+}
+
+
+dependencies {
+    implementation("org.aspectj:aspectjrt:1.9.19")
+//    testImplementation ("org.testng:testng:7.8.0")
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+    implementation 'org.reactivestreams:reactive-streams:1.0.4'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = artName
+            artifact ("build/libs/$artName-$version"+".jar") {
+                extension "jar"
+            }
+            artifact ("build/libs/$artName-$version"+"-sources.jar") {
+                classifier "sources"
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name "nexus"
+            allowInsecureProtocol = true
+            def releasesRepoUrl = "http://$NEXUS_HOST:$NEXUS_PORT/repository/maven-releases/"
+            def snapshotsRepoUrl = "http://$NEXUS_HOST:$NEXUS_PORT/repository/maven-snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+            credentials {
+                username "$NEXUS_USER"
+                password "$NEXUS_PSW"
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
