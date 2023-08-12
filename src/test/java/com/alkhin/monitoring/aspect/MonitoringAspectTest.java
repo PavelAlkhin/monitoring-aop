@@ -14,7 +14,7 @@ public class MonitoringAspectTest {
     private final MonitoringAspect aspect = new MonitoringAspect(new MapMonitoringService(false));
 
     @Test
-    public void testMethodTimeLogger() throws Throwable {
+    public void testMethodTimeLogger() {
 
         Assertions.assertNotNull(aspect);
 

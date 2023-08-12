@@ -10,8 +10,6 @@ public class MetricContextMapTest {
 
     MetricContextConcurrentMap metricContextConcurrentMap;
 
-    private final String METRIC_NAME = "METRIC";
-
     private Metric metric;
 
     @BeforeEach
@@ -19,6 +17,7 @@ public class MetricContextMapTest {
 
         metricContextConcurrentMap = new MetricContextConcurrentMap(false);
 
+        String METRIC_NAME = "METRIC";
         for (int i = 0; i < 100; i++)
             metricContextConcurrentMap.incrementSuccess(METRIC_NAME, 1);
 
