@@ -14,20 +14,17 @@ public class MonitoringAspectTest {
     private final MonitoringAspect aspect = new MonitoringAspect(new MapMonitoringService(false));
 
     @Test
-    public void testMethodTimeLogger() {
+    public void testMethodTimeLogger() throws Throwable {
 
         Assertions.assertNotNull(aspect);
 
-//        aspect.methodTimeLogger(proceedingJoinPoint);
+        // aspect.methodTimeLogger(proceedingJoinPoint);
 
-//        CustomerAdapterReactiveKafkaServerMessageListener.class;
+        // CustomerAdapterReactiveKafkaServerMessageListener.class;
 
-//        when(proceedingJoinPoint.getSignature()).thenReturn();
+        // when(proceedingJoinPoint.getSignature()).thenReturn();
 
-//        verify(proceedingJoinPoint, times(1)).proceed();
-
-
-
+        // verify(proceedingJoinPoint, times(1)).proceed();
 
     }
 }
